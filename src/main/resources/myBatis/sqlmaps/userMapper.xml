@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User">  
+   <select id="UserList"
+      resultType="com.green.user.vo.UserVo">
+      SELECT USERID, USERNAME, 
+             TO_CHAR(INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE 
+        FROM TUSER
+       ORDER BY INDATE DESC
+   </select>
+   
+    <insert id="UserInsert">
+      INSERT INTO TUSER ( USERID, PASSWD, USERNAME  )
+       VALUES ( #{userid}, #{passwd}, #{username} )
+    </insert>
+    
+    <select id="User"
+            resultType="com.green.user.vo.UserVo">
+       SELECT  USERID, PASSWD, USERNAME, INDATE
+        FROM   TUSER
+        WHERE   USERID = #{userid}
+    </select>
+    
+    <update id="UserUpdate">
+       
+       UPDATE   TUSER
+         SET    PASSWD   = #{passwd},
+                USERNAME = #{username} 
+         WHERE  USERID   = #{userid}
+       
+    </update>
+    
+    <delete id="UserDelete">
+    
+      DELETE   TUSER
+       WHERE   USERID   = #{userid}
+        
+    </delete>
+   
+</mapper>   
+
+
+
+
+
+
+
